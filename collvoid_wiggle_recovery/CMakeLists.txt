@@ -12,7 +12,18 @@ find_package(catkin REQUIRED
             base_local_planner
         )
 
-find_package(Eigen REQUIRED)
+# Eigen3 FindScript Backward compatibility (ubuntu saucy)
+# Since FindEigen.cmake is deprecated starting from jade.
+if (EXISTS "FindEigen3.cmake")
+  find_package(Eigen3 REQUIRED)
+  set(Eigen_INCLUDE_DIRS ${Eigen3_INCLUDE_DIRS})
+elseif (EXISTS "FindEigen.cmake")
+  find_package(Eigen REQUIRED)
+elseif (EXISTS "FindEigen.cmake")
+  message(WARNING "No findEigen cmake script found. You must provde one of them,
+  e.g. by adding it to ${PROJECT_SOURCE_DIR}/cmake_modules.")
+endif (EXISTS "FindEigen3.cmake")
+
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
@@ -39,4 +50,3 @@ install(TARGETS collvoid_wiggle_recovery
 install(FILES rotate_plugin.xml
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
-

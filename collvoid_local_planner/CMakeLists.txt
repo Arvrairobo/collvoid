@@ -77,4 +77,3 @@ target_link_libraries(ROSAgent
         ${Boost_LIBRARIES})
 add_dependencies(ROSAgent ${${PROJECT_NAME}_EXPORTED_TARGETS})
 add_dependencies(ROSAgent ${catkin_EXPORTED_TARGETS})
-
