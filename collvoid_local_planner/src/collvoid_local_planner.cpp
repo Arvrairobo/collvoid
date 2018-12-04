@@ -285,10 +285,17 @@ namespace collvoid_local_planner {
         tf::Stamped<tf::Pose> me_pose;
 
         tf_->transformPose(me_->global_frame_, current_pose_, me_pose);
-        tf_->transformPose(me_->global_frame_, target_pose, target_pose);
+        try
+        {
+            tf_->transformPose(me_->global_frame_, target_pose, target_pose);
+        }
+        catch (const tf2::ExtrapolationException& e)
+        {
+            target_pose.stamp_ = ros::Time(0);
+            tf_->transformPose(me_->global_frame_, target_pose, target_pose);
+        }
 
         geometry_msgs::Twist res;
-
 
 
         res.linear.x = target_pose.getOrigin().x() - me_pose.getOrigin().x();
