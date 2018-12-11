@@ -437,7 +437,7 @@ AmclNode::AmclNode() :
         nomotion_update_srv_= nh_.advertiseService("request_nomotion_update", &AmclNode::nomotionUpdateCallback, this);
         set_map_srv_= nh_.advertiseService("set_map", &AmclNode::setMapCallback, this);
 
-        laser_scan_sub_ = new message_filters::Subscriber<sensor_msgs::LaserScan>(nh_, scan_topic_, 100);
+        laser_scan_sub_ = new message_filters::Subscriber<sensor_msgs::LaserScan>(nh_, ros::names::resolve(scan_topic_), 100);
         laser_scan_filter_ =
                 new tf::MessageFilter<sensor_msgs::LaserScan>(*laser_scan_sub_,
                                                               *tf_,
@@ -616,7 +616,7 @@ void AmclNode::runFromBag(const std::string &in_bag_fn)
         bag.open(in_bag_fn, rosbag::bagmode::Read);
         std::vector<std::string> topics;
         topics.push_back(std::string("tf"));
-        std::string scan_topic_name = "base_scan"; // TODO determine what topic this actually is from ROS
+        std::string scan_topic_name = ros::names::resolve(scan_topic_); // TODO determine what topic this actually is from ROS
         topics.push_back(scan_topic_name);
         rosbag::View view(bag, rosbag::TopicQuery(topics));
 
