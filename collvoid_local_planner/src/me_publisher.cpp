@@ -51,7 +51,9 @@ void MePublisher::init(ros::NodeHandle nh, tf::TransformListener *tf) {
 
 
     private_nh.param<std::string>("base_frame", base_frame_, nh.getNamespace() + "/base_link");
+    base_frame_ = ros::names::resolve(base_frame_);
     private_nh.param<std::string>("global_frame", global_frame_, "map");
+    global_frame_ = ros::names::resolve(global_frame_);
 
 
     eps_ = getParamDef(private_nh, "eps", 0.1);
