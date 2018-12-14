@@ -327,8 +327,6 @@ namespace collvoid_local_planner {
 
         collvoid::Vector2 pref_vel = collvoid::Vector2(goal_dir.x(), goal_dir.y());
 
-
-
         me_->computeNewVelocity(pref_vel, cmd_vel);
 
         double cmd_vel_len = collvoid::abs(collvoid::Vector2(cmd_vel.linear.x, cmd_vel.linear.y));
