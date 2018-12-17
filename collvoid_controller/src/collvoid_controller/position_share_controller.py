@@ -97,7 +97,6 @@ class PositionShareController(object):
             robot['twist'] = msg.twist
             robot['position'] = msg.pose
             robot['footprint'] = msg.footprint
-            robot['radius'] = msg.radius
             robot['holo_robot'] = msg.holo_robot
             robot['holo_speed'] = msg.holonomic_velocity
             robot['radius'] = msg.radius
