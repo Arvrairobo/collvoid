@@ -129,7 +129,7 @@ namespace collvoid {
 
         //Agent description
         std::string base_frame_, global_frame_, name_space_;
-        double wheel_base_;
+        double axle_track_;
         double fixed_robot_radius_;
 
         //set automatically

@@ -178,9 +178,9 @@ void ROSAgent::init(ros::NodeHandle private_nh, tf::TransformListener *tf, base_
         //holo_robot
         getParam(private_nh, "holo_robot", &holo_robot_);
         if (!holo_robot_)
-                getParam(private_nh, "wheel_base", &wheel_base_);
+                getParam(private_nh, "axle_track", &axle_track_);
         else
-                wheel_base_ = 0.0;
+                axle_track_ = 0.0;
 
 
         getParam(private_nh, "robot_radius", &fixed_robot_radius_);
@@ -1096,8 +1096,8 @@ Eigen::Vector3f ROSAgent::createTwistFromVector(Vector2 speed, base_local_planne
 }
 
 double ROSAgent::vMaxAng() {
-        double theoretical_max_v = planner_util_->getCurrentLimits().max_rot_vel * wheel_base_ / 2.0;
-        //return theoretical_max_v - std::abs(base_odom_.twist.twist.angular.z) * wheel_base_/2.0;
+        double theoretical_max_v = planner_util_->getCurrentLimits().max_rot_vel * axle_track_ / 2.0;
+        //return theoretical_max_v - std::abs(base_odom_.twist.twist.angular.z) * axle_track_/2.0;
         return planner_util_->getCurrentLimits().max_vel_x; //TODO: fixme!!
 }
 

@@ -13,7 +13,7 @@ CollvoidLocalPlanner:
   xy_goal_tolerance: 0.10
 #  latch_xy_goal_tolerance: true
   global_frame: /map
-  wheel_base: 0.25
+  axle_track: 0.25
   time_to_holo: 0.4
   min_error_holo: 0.05
   max_error_holo: 0.15
